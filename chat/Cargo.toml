@@ -1,0 +1,12 @@
+[package]
+name = "chat"
+version = "0.1.0"
+authors = ["flyq <flyq951@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+libp2p="0.10.0"
+futures = "0.1"
+env_logger="0.6.2"
+tokio-stdin-stdout="0.1.5"
+tokio="0.1.22"
