@@ -1,5 +1,3 @@
-use libp2p::core::
-
 fn main() {
     println!("Hello, world!");
 }
