@@ -183,6 +183,7 @@ fn main() {
                     println!("it is ready some");
                 },
                 Async::Ready(None) | Async::NotReady => {
+                    println!("ready none or notready");
                     if !listening {
                         if let Some(a) = Swarm::listeners(&swarm).next() {
                             println!("Listening on {:?}", a);
@@ -190,8 +191,9 @@ fn main() {
                             println!("swarm listening");
                         }
                     }
-                    break
+                    break;
                 }
+                _ => println!("other swarm ready"),
             }
             println!("here is swarm poll, swarm listening on ");
         }
