@@ -90,6 +90,7 @@ fn main() {
 
             match event {
                 libp2p::mdns::MdnsEvent::Discovered(list) => {
+                    println!("discoved");
                     for (peer, _) in list {
                         println!("here is peer discovered: {}",peer);
                         
@@ -97,6 +98,7 @@ fn main() {
                     }
                 },
                 libp2p::mdns::MdnsEvent::Expired(list) => {
+                    println!("expired");
                     for (peer, _) in list {
                         if !self.mdns.has_node(&peer) {
                             self.floodsub.remove_node_from_partial_view(&peer);
@@ -104,6 +106,8 @@ fn main() {
                         }
                     }
                 }
+                _ => println!("no mdns event"),
+
             }
         }
     }
@@ -159,6 +163,7 @@ fn main() {
     let mut listening = false;
     tokio::run(futures::future::poll_fn(move || -> Result<_, ()> {
         loop {
+            println!("loop stdin poll");
             match framed_stdin.poll().expect("Error while polling stdin") {
                 Async::Ready(Some(line)) => {
                     swarm.floodsub.publish(&floodsub_topic, line.as_bytes());
@@ -172,6 +177,7 @@ fn main() {
         }
 
         loop {
+            println!("loop swarm poll");
             match swarm.poll().expect("Error while polling swarm") {
                 Async::Ready(Some(_)) => {
                     println!("it is ready some");
